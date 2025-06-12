@@ -38,3 +38,30 @@ class Weapon {
     }
 
 }
+
+class Case{
+    constructor(caseName, caseWeapons, rarityOdds, statTrakOdds){
+        this.caseName = caseName;
+        this.caseWeapons = caseWeapons;
+        this.rarityOdds = rarityOdds;
+        this.statTrakOdds = statTrakOdds;
+    }
+}
+
+class WeaponCase extends Case{
+    constructor(caseName = "CS:GO Weapon Case",
+                caseWeapons = ["AWP | Lightning Strike", "AK-47 | Case Hardened", "Desert Eagle | Hypotic",
+                             "Glock-18 | Dragon Tatto", "USP-S | Dark Water", "M4A1-S | Dark Water",
+                             "SG 553 | Ultraviolet", "MP7 | Skulls", "AUG | Wings"], 
+                rarityOdds = {"Mil-Spec Grade"   : 0.7992,
+                              "Restricted"       : 0.1598,
+                              "Classified"       : 0.0320,
+                              "Exceedingly Rare" : 0.0026
+                            },
+                statTrakOdds = 0.1,
+    
+    ){
+        super(caseName, caseWeapons, rarityOdds, statTrakOdds);
+    }
+
+}
