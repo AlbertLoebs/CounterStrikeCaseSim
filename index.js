@@ -136,6 +136,9 @@ function openCase(caseName){
     const isStatTrak = Math.random() < STATTRAK_ODDS;
     const unboxedWeapon = new Weapon(weaponName, selectedRarity, null, null, isStatTrak);
     console.log(unboxedWeapon);
+    
+    const droppedItemDiv = document.querySelector(".droppedItem");
+    const prefix = unboxedWeapon.statTrak ? "StatTrak " : "";
+    droppedItemDiv.textContent = `${prefix}${unboxedWeapon.name} | Float: ${unboxedWeapon.float.toFixed(4)} | Seed: ${unboxedWeapon.seed} | Wear: ${unboxedWeapon.condition}`;
 }
 
-openCase("CS:GO Weapon Case");
