@@ -3,12 +3,21 @@
     background-color: lightgray;
 }
 
+.cases{
+    display: flex;
+}
+
 .CSGOWeaponCase{
     border: 2px solid;
     width: 250px;
     align-items: center;
 }
 
+.eSports2013Case{
+    border: 2px solid;
+    width: 250px;
+    align-items: center;
+}
+
 .button{
-    margin: 0px 65px;
 }

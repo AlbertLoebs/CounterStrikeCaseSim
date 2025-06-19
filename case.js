@@ -10,7 +10,7 @@ export const RARITY_ODDS = {
 
 export const STATTRAK_ODDS = 0.1;
 
-const allKnifes = [
+export const allKnifes = [
   "Karambit",
   "Bayonet",
   "Gut Knife",
@@ -34,6 +34,19 @@ const allKnifes = [
 
 const knifePool = {
   "CS:GO Weapon Case" : {
+    "Bayonet" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
+                 "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+    "Karambit" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
+                 "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],   
+    "Gut Knife" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
+                 "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+    "M9 Bayonet" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
+                 "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+    "Flip Knife" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
+                 "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+  },
+
+  "eSports 2013 Case" : {
     "Bayonet" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
                  "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
     "Karambit" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
@@ -82,6 +95,27 @@ export class WeaponCase extends Case {
     });
   }
 }
+
+export class eSports2013Case extends Case {
+  constructor() {
+    super("eSports 2013 Case", {
+      "Mil-Spec Grade": [
+        "M4A4 | Faded Zebra", "MAG-7 | Memento", "Famas | Doomkitty"
+      ],
+      "Restricted": [
+        "Galil Ar | Orange DDPAT", "Sawed-Off | Orange DDPAT", "P250 | Splash"
+      ],
+      "Classified": [
+        "AWP | Boom", "AK-47 | Red Laminate"
+      ],
+      "Covert": [
+        "P90 | Death by kitty"
+      ], 
+      "Exceedingly Rare": getKnife("CS:GO Weapon Case")
+    });
+  }
+}
+
 
 export function getKnifeNames(caseName) {
   return getKnife(caseName);

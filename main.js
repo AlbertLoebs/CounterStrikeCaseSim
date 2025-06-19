@@ -1,9 +1,22 @@
 import { Weapon } from './weapon.js';
-import { WeaponCase, RARITY_ODDS, STATTRAK_ODDS } from './case.js';
+import { WeaponCase, eSports2013Case, RARITY_ODDS, STATTRAK_ODDS, allKnifes } from './case.js';
 
 async function openCase(caseName) {
-    const weaponCase = new WeaponCase();
-    const weaponPool = weaponCase.caseWeapons;
+    let nameOfCase;
+
+    switch(caseName){
+        case `CS:GO Weapon Case` :
+            nameOfCase = new WeaponCase();
+            break;
+        case `eSports 2013 Case` :
+            nameOfCase = new eSports2013Case();
+            break;
+        default :
+        console.error("Unknown Case");
+        return;
+    }
+
+    const weaponPool = nameOfCase.caseWeapons;
 
     const roll = Math.random();
     let lowerBound = 0;
@@ -22,48 +35,68 @@ async function openCase(caseName) {
     const randomIndex = Math.floor(Math.random() * weapons.length);
     const weaponName = weapons[randomIndex];
     const isStatTrak = Math.random() < STATTRAK_ODDS;
+
+    // Handle StatTrak naming properly for knives
+    const isKnife = allKnifes.some(knife => weaponName.includes(knife));
+    let displayName = weaponName;
+    let marketHashName = weaponName;
+
+    if (isStatTrak) {
+        if (isKnife) {
+            // For knives, StatTrak comes before the ★
+            displayName = weaponName.includes('★') 
+                ? weaponName.replace('★', 'StatTrak™ ★')
+                : `StatTrak™ ${weaponName}`;
+            marketHashName = weaponName.includes('★')
+                ? weaponName.replace('★', 'StatTrak™ ★')
+                : `StatTrak™ ${weaponName}`;
+        } else {
+            // For regular weapons, StatTrak is just a prefix
+            displayName = `StatTrak™ ${weaponName}`;
+            marketHashName = `StatTrak™ ${weaponName}`;
+        }
+    }
+
     const unboxedWeapon = new Weapon(weaponName, selectedRarity, null, null, isStatTrak);
 
     console.log(unboxedWeapon);
 
     const droppedItemDiv = document.querySelector(".droppedItem");
-    const prefix = unboxedWeapon.statTrak ? "StatTrak\u2122 " : "";
-    droppedItemDiv.textContent = `${prefix}${unboxedWeapon.name} (${unboxedWeapon.condition}) | Float: ${unboxedWeapon.float.toFixed(4)} | Seed: ${unboxedWeapon.seed}`;
+    droppedItemDiv.textContent = `${displayName} (${unboxedWeapon.condition}) | Float: ${unboxedWeapon.float.toFixed(4)} | Seed: ${unboxedWeapon.seed}`;
 
-    const price = await fetchPrice(unboxedWeapon.name, unboxedWeapon.condition);
+    const price = await fetchPrice(marketHashName, unboxedWeapon.condition);
 
     if (price !== null) {
         droppedItemDiv.textContent += ` | Price: $${price}`;
     } else {
         droppedItemDiv.textContent += ` | Price: Can't find a value`;
     }
-
 }
 
 window.openCase = openCase;
-fetchPrice(unboxedWeapon.name, unboxedWeapon.condition);
 
 async function fetchPrice(weaponName, condition) {
     try {
-        const response = await fetch(`prices.json`)
-
+        const response = await fetch(`prices.json`);
         if (!response.ok) {
-            throw new Error(error)
+            throw new Error('Failed to fetch prices');
         }
 
         const data = await response.json();
-
         const searchItem = `${weaponName} (${condition})`;
-        const item = data.items.find(entry => entry.market_hash_name === searchItem);
+        
+        let item = data.items.find(entry => entry.market_hash_name === searchItem);
+        
+        const priceNumber = Number(item.price);
 
         if (item) {
-            return item.price;
+            return priceNumber.toFixed(2);
         } else {
-            console.log(`Can't find a price for ${weaponName} ${condition}`);
+            console.log(`Can't find a price for ${searchItem}`);
             return null;
         }
     } catch (error) {
-        console.error(error);
+        console.error('Error fetching price:', error);
         return null;
     }
 }
