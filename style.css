@@ -3,9 +3,9 @@
     background-color: lightgray;
 }
 
-.caseImg {
-    display: flex;
-    flex-direction: column;
+.CSGOWeaponCase{
+    border: 2px solid;
+    width: 250px;
     align-items: center;
 }
 
