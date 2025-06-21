@@ -60,10 +60,10 @@ async function openCase(caseName) {
     const unboxedWeapon = new Weapon(weaponName, selectedRarity, null, null, isStatTrak);
 
     console.log(unboxedWeapon);
+    displayItem(unboxedWeapon.name);
 
     const droppedItemDiv = document.querySelector(".droppedItem");
     droppedItemDiv.textContent = `${displayName} (${unboxedWeapon.condition}) | Float: ${unboxedWeapon.float.toFixed(4)} | Seed: ${unboxedWeapon.seed}`;
-
     const price = await fetchPrice(marketHashName, unboxedWeapon.condition);
 
     if (price !== null) {
@@ -99,4 +99,20 @@ async function fetchPrice(weaponName, condition) {
         console.error('Error fetching price:', error);
         return null;
     }
+}
+
+function displayItem(weaponName){
+    console.log(weaponName);
+    weaponName = weaponName.toLowerCase();
+    weaponName = weaponName.replace("|", "");
+    weaponName = weaponName.replace("-", "");
+    weaponName = weaponName.replace(/\s/g, "");
+  
+    const droppedItemDiv = document.querySelector('.droppedItemImage');
+
+    const path = `./CSGOWeaponCaseSkins/${weaponName}.png`;
+    droppedItemDiv.innerHTML = `<img src="${path}" alt="${weaponName}">`;
+
+    console.log(weaponName);
+
 }
