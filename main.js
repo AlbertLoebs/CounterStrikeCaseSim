@@ -1,5 +1,6 @@
 import { Weapon } from './weapon.js';
 import { WeaponCase, eSports2013Case, RARITY_ODDS, STATTRAK_ODDS, allKnifes } from './case.js';
+import { saveToLocalStorage } from './inventory.js';
 
 async function openCase(caseName) {
     let nameOfCase;
@@ -36,33 +37,48 @@ async function openCase(caseName) {
     const weaponName = weapons[randomIndex];
     const isStatTrak = Math.random() < STATTRAK_ODDS;
 
-    // Handle StatTrak naming properly for knives
+    // Determine if this is a knife
     const isKnife = allKnifes.some(knife => weaponName.includes(knife));
+
+    let finish = "";
+    if (isKnife) {
+        // Get knife key match
+        const knifeKey = Object.keys(knifePool[caseName]).find(k => weaponName.includes(k));
+        if (knifeKey) {
+            const finishes = knifePool[caseName][knifeKey];
+            const validFinishes = finishes.filter(f => f !== "★"); // exclude star
+            finish = validFinishes[Math.floor(Math.random() * validFinishes.length)];
+        }
+    }
+
+    // Build displayName and marketHashName
     let displayName = weaponName;
     let marketHashName = weaponName;
 
-    if (isStatTrak) {
-        if (isKnife) {
-            // For knives, StatTrak comes before the ★
-            displayName = weaponName.includes('★')
-                ? weaponName.replace('★', 'StatTrak™ ★')
-                : `StatTrak™ ${weaponName}`;
-            marketHashName = weaponName.includes('★')
-                ? weaponName.replace('★', 'StatTrak™ ★')
-                : `StatTrak™ ${weaponName}`;
-        } else {
-            // For regular weapons, StatTrak is just a prefix
+    if (isKnife) {
+        displayName = `★ ${weaponName} | ${finish}`;
+        marketHashName = displayName;
+
+        if (isStatTrak) {
+            displayName = displayName.replace("★", "StatTrak™ ★");
+            marketHashName = marketHashName.replace("★", "StatTrak™ ★");
+        }
+    } else {
+        if (isStatTrak) {
             displayName = `StatTrak™ ${weaponName}`;
             marketHashName = `StatTrak™ ${weaponName}`;
+        } else {
+            displayName = weaponName;
+            marketHashName = weaponName;
         }
     }
 
     const unboxedWeapon = new Weapon(weaponName, selectedRarity, null, null, isStatTrak);
-
     console.log(unboxedWeapon);
 
     const droppedItemDiv = document.querySelector(".droppedItem");
     droppedItemDiv.textContent = `${displayName} (${unboxedWeapon.condition}) | Float: ${unboxedWeapon.float} | Seed: ${unboxedWeapon.seed}`;
+
     const price = await fetchPrice(marketHashName, unboxedWeapon.condition);
 
     if (price !== null) {
@@ -70,7 +86,7 @@ async function openCase(caseName) {
     } else {
         droppedItemDiv.textContent += ` | Price: Can't find a value`;
     }
-    displayItem(unboxedWeapon.name, caseName);
+    displayItem(displayName, caseName, unboxedWeapon, price);
 
 }
 
@@ -124,22 +140,25 @@ async function fetchPrice(weaponName, condition) {
     }
 }
 
-function displayItem(weaponName, caseName) {
-    console.log(weaponName);
-    weaponName = weaponName.toLowerCase();
-    weaponName = weaponName.replace("|", "");
-    weaponName = weaponName.replace("-", "");
-    weaponName = weaponName.replace(/\s/g, "");
+function displayItem(displayName, caseName, unboxedWeapon, price) {
+    console.log(displayName);
+
+    let weaponKey = displayName.toLowerCase()
+        .replace(/^stattrak™\s*/, '')
+        .replace(/\|/g, '')
+        .replace(/-/g, '')
+        .replace(/\s/g, '');
+    console.log(weaponKey);
 
     const droppedItemDiv = document.querySelector('.droppedItemImage');
     let path;
 
     switch (caseName) {
         case "CS:GO Weapon Case":
-            path = `./CSGOWeaponCaseSkins/${weaponName}.png`;
+            path = `./CSGOWeaponCaseSkins/${weaponKey}.png`;
             break;
         case "eSports 2013 Case":
-            path = `./eSports2013CaseSkins/${weaponName}.png`;
+            path = `./eSports2013CaseSkins/${weaponKey}.png`;
             break;
         default:
             console.error("Unknown case");
@@ -147,8 +166,16 @@ function displayItem(weaponName, caseName) {
     }
 
 
-    droppedItemDiv.innerHTML = `<img src="${path}" alt="${weaponName}">`;
+    droppedItemDiv.innerHTML = `<img src="${path}" alt="${weaponKey}">`;
 
-    console.log(weaponName);
+    const itemToSave = {
+        name: displayName,
+        condition: unboxedWeapon.condition,
+        float: unboxedWeapon.float,
+        seed: unboxedWeapon.seed,
+        price: price ?? "N/A",
+        imagePath: path
+    };
 
+    saveToLocalStorage(itemToSave);
 }

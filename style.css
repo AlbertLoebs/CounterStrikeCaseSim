@@ -29,7 +29,7 @@ body{
 }
 
 .droppedItemImage{
-    margin-top: 100px;
+    margin-top: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,4 +38,12 @@ body{
 .droppedItemImage img {
   max-width: 100%;
   height: auto;
+}
+
+.inventoryBtn{
+  text-decoration: none;
+  color: black;
+  position: absolute;
+  right: 20px;
+  background-color: hsl(29, 100%, 50%);
 }

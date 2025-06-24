@@ -1,0 +1,19 @@
+#inventoryContainer{
+    border: 2px solid black;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.inventoryItem {
+  border: 2px solid black;
+  padding: 10px;
+  text-align: center;
+}
+
+.inventoryItem img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
