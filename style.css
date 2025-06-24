@@ -1,20 +1,41 @@
+body{
+    background-color: gray;
+}
+
 #title {
     text-align: center;
-    background-color: lightgray;
+}
+
+.highlight{
+    background-color: hsl(29, 100%, 50%);
 }
 
 .cases{
     display: flex;
+    text-align: center;
 }
 
-.CSGOWeaponCase{
+.CSGOWeaponCase,.eSports2013Case {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     border: 2px solid;
     width: 250px;
     align-items: center;
 }
 
-.eSports2013Case{
-    border: 2px solid;
-    width: 250px;
+.droppedItem{
+    text-align: center;
+}
+
+.droppedItemImage{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
     align-items: center;
+}   
+
+.droppedItemImage img {
+  max-width: 100%;
+  height: auto;
 }
