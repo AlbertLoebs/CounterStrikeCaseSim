@@ -95,6 +95,12 @@ window.openCase = openCase;
 async function fetchPrice(weaponName, condition) {
     const wearOrder = ["Factory New", "Minimal Wear", "Field-Tested", "Well-Worn", "Battle-Scarred"];
 
+    function normalizeName(name) {
+        return name
+            .replace(/\u2122/g, "™")
+            .toLowerCase();
+    }
+
     try {
         const response = await fetch(`prices.json`);
         if (!response.ok) {
@@ -102,10 +108,9 @@ async function fetchPrice(weaponName, condition) {
         }
 
         const data = await response.json();
-        const searchItem = `${weaponName} (${condition})`;
+        const searchItem = normalizeName(`${weaponName} (${condition})`);
 
-        let item = data.items.find(entry => entry.market_hash_name === searchItem);
-
+        let item = data.items.find(entry => normalizeName(entry.market_hash_name) === searchItem);
 
         if (item) {
             const priceNumber = Number(item.price);
@@ -115,18 +120,20 @@ async function fetchPrice(weaponName, condition) {
 
             for (let offset = 1; offset < wearOrder.length; offset++) {
                 let upIndex = conditionIndex - offset;
-                // check above current
                 if (upIndex >= 0) {
                     let tryCondition = wearOrder[upIndex];
-                    let tryItem = data.items.find(entry => entry.market_hash_name === `${weaponName} (${tryCondition})`);
+                    let tryItem = data.items.find(entry =>
+                        normalizeName(entry.market_hash_name) === normalizeName(`${weaponName} (${tryCondition})`)
+                    );
                     if (tryItem) return Number(tryItem.price).toFixed(2);
                 }
 
-                // check below current
                 let downIndex = conditionIndex + offset;
                 if (downIndex < wearOrder.length) {
                     let tryCondition = wearOrder[downIndex];
-                    let tryItem = data.items.find(entry => entry.market_hash_name === `${weaponName} (${tryCondition})`);
+                    let tryItem = data.items.find(entry =>
+                        normalizeName(entry.market_hash_name) === normalizeName(`${weaponName} (${tryCondition})`)
+                    );
                     if (tryItem) return Number(tryItem.price).toFixed(2);
                 }
             }
@@ -143,9 +150,12 @@ async function fetchPrice(weaponName, condition) {
 function displayItem(displayName, caseName, unboxedWeapon, price) {
     console.log(displayName);
 
+    let isKnife = allKnifes.some(knife => displayName.includes(knife));
+
     let weaponKey = displayName.toLowerCase()
         .replace(/^stattrak™\s*/, '')
         .replace(/\|/g, '')
+        .replace(/★/g, '')
         .replace(/-/g, '')
         .replace(/\s/g, '');
     console.log(weaponKey);
@@ -153,16 +163,20 @@ function displayItem(displayName, caseName, unboxedWeapon, price) {
     const droppedItemDiv = document.querySelector('.droppedItemImage');
     let path;
 
-    switch (caseName) {
-        case "CS:GO Weapon Case":
-            path = `./CSGOWeaponCaseSkins/${weaponKey}.png`;
-            break;
-        case "eSports 2013 Case":
-            path = `./eSports2013CaseSkins/${weaponKey}.png`;
-            break;
-        default:
-            console.error("Unknown case");
-            return;
+    if (isKnife) {
+        path = `./knifeImages/${weaponKey}.png`;
+    } else {
+        switch (caseName) {
+            case "CS:GO Weapon Case":
+                path = `./CSGOWeaponCaseSkins/${weaponKey}.png`;
+                break;
+            case "eSports 2013 Case":
+                path = `./eSports2013CaseSkins/${weaponKey}.png`;
+                break;
+            default:
+                console.error("Unknown case");
+                return;
+        }
     }
 
 

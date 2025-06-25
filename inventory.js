@@ -7,7 +7,7 @@ export function saveToLocalStorage(item) {
 }
 
 function loadInventory() {
-    const inventory = JSON.parse(localStorage.getItem("inventory")) || [];
+    inventory = JSON.parse(localStorage.getItem("inventory")) || [];
 
     const container = document.querySelector("#inventoryContainer");
     if (!container) {
@@ -37,6 +37,29 @@ function loadInventory() {
 
         container.appendChild(itemDiv);
     });
+
+    updateTotalPrice();  // update total price when loading
 }
 
-window.addEventListener('DOMContentLoaded', loadInventory);
+function updateTotalPrice() {
+    const totalPriceElem = document.querySelector("#totalPrice");
+    if (!totalPriceElem) {
+        console.error("Total price element not found in DOM");
+        return;
+    }
+
+    let total = 0;
+    inventory.forEach(item => {
+        const price = parseFloat(item.price);
+        if (!isNaN(price)) {
+            total += price;
+        }
+    });
+
+    totalPriceElem.textContent = `$${total.toFixed(2)}`;
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    loadInventory();
+    updateTotalPrice();
+});
