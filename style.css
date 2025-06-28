@@ -15,7 +15,7 @@ body{
     text-align: center;
 }
 
-.CSGOWeaponCase,.eSports2013Case {
+.CSGOWeaponCase,.eSports2013Case, .operationBravoCase {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;

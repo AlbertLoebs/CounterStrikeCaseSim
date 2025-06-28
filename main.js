@@ -1,5 +1,5 @@
 import { Weapon } from './weapon.js';
-import { WeaponCase, eSports2013Case, RARITY_ODDS, STATTRAK_ODDS, allKnifes } from './case.js';
+import { WeaponCase, eSports2013Case, RARITY_ODDS, STATTRAK_ODDS, allKnifes, OperationBravoCase } from './case.js';
 import { saveToLocalStorage } from './inventory.js';
 
 async function openCase(caseName) {
@@ -11,6 +11,9 @@ async function openCase(caseName) {
             break;
         case `eSports 2013 Case`:
             nameOfCase = new eSports2013Case();
+            break;
+        case `Operation Bravo Case`:
+            nameOfCase = new OperationBravoCase();
             break;
         default:
             console.error("Unknown Case");
@@ -172,6 +175,9 @@ function displayItem(displayName, caseName, unboxedWeapon, price) {
                 break;
             case "eSports 2013 Case":
                 path = `./eSports2013CaseSkins/${weaponKey}.png`;
+                break;
+            case "Operation Bravo Case":
+                path = `./operationBravoCaseSkins/${weaponKey}.png`;
                 break;
             default:
                 console.error("Unknown case");

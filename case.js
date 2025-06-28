@@ -57,6 +57,19 @@ const knifePool = {
                  "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
     "Flip Knife" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
                  "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+  },
+
+  "Operation Bravo Case" : {
+    "Bayonet" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
+                 "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+    "Karambit" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
+                 "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],   
+    "Gut Knife" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
+                 "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+    "M9 Bayonet" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
+                 "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+    "Flip Knife" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
+                 "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
   }
 };
 
@@ -111,7 +124,27 @@ export class eSports2013Case extends Case {
       "Covert": [
         "P90 | Death by kitty"
       ], 
-      "Exceedingly Rare": getKnife("CS:GO Weapon Case")
+      "Exceedingly Rare": getKnife("eSports 2013 Case")
+    });
+  }
+}
+
+export class OperationBravoCase extends Case {
+  constructor() {
+    super("Operation Bravo Case", {
+      "Mil-Spec Grade": [
+        "Daul Berettas | Black Limba", "Nova | Tempest", "G3SG1 | Demeter", "UMP-45 | Bone Pile", "Galil AR | Shattered", "SG 553 | Wave Spray"
+      ],
+      "Restricted": [
+        "Mac-10 | Graven", "M4A1-S | Bright Water", "M4A4 | Zirka", "USP-S | Overgrowth"
+      ],
+      "Classified": [
+        "P2000 | Ocean Foam", "AWP | Graphite", "P90 | Emerald Dragon"
+      ],
+      "Covert": [
+        "Desert Eagle | Golden Koi", "AK-47 | Fire Serpent"
+      ], 
+      "Exceedingly Rare": getKnife("Operation Bravo Case")
     });
   }
 }
