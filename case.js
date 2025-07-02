@@ -70,6 +70,19 @@ const knifePool = {
                  "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
     "Flip Knife" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
                  "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+  },
+
+  "CS:GO Weapon Case 2" : {
+    "Bayonet" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
+                 "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+    "Karambit" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
+                 "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],   
+    "Gut Knife" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
+                 "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+    "M9 Bayonet" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
+                 "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+    "Flip Knife" : ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained", 
+                 "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
   }
 };
 
@@ -133,7 +146,7 @@ export class OperationBravoCase extends Case {
   constructor() {
     super("Operation Bravo Case", {
       "Mil-Spec Grade": [
-        "Daul Berettas | Black Limba", "Nova | Tempest", "G3SG1 | Demeter", "UMP-45 | Bone Pile", "Galil AR | Shattered", "SG 553 | Wave Spray"
+        "Dual Berettas | Black Limba", "Nova | Tempest", "G3SG1 | Demeter", "UMP-45 | Bone Pile", "Galil AR | Shattered", "SG 553 | Wave Spray"
       ],
       "Restricted": [
         "Mac-10 | Graven", "M4A1-S | Bright Water", "M4A4 | Zirka", "USP-S | Overgrowth"
@@ -145,6 +158,26 @@ export class OperationBravoCase extends Case {
         "Desert Eagle | Golden Koi", "AK-47 | Fire Serpent"
       ], 
       "Exceedingly Rare": getKnife("Operation Bravo Case")
+    });
+  }
+}
+
+export class weaponCase2 extends Case {
+  constructor() {
+    super("CS:GO Weapon Case 2", {
+      "Mil-Spec Grade": [
+        "FAMAS | Hexane", "Tec-9 | Blue Titanium", "M4A1-S | Blood Tiger", "P250 | Hive", "SCAR-20 | Crimson Web"
+      ],
+      "Restricted": [
+        "MP9 | Hypnotic", , "Five-SeveN | Case Hardened", "Dual Berettas | Hemoglobin", "Nova | Graphite"
+      ],
+      "Classified": [
+        "P90 | Cold Blooded", "USP-S | Serum"
+      ],
+      "Covert": [
+        "SSG 08 | Blood In The Water"
+      ], 
+      "Exceedingly Rare": getKnife("CS:GO Weapon Case 2")
     });
   }
 }
