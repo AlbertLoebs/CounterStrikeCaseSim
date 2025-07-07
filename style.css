@@ -47,3 +47,11 @@ body{
   right: 20px;
   background-color: hsl(29, 100%, 50%);
 }
+
+.balance{
+  text-decoration: none;
+  color: black;
+  position: absolute;
+  right: 450px;
+  background-color: hsl(29, 100%, 50%);
+}

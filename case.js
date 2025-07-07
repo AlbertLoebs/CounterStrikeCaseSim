@@ -133,7 +133,7 @@ export class OperationBravoCase extends Case {
   constructor() {
     super("Operation Bravo Case", {
       "Mil-Spec Grade": [
-        "Daul Berettas | Black Limba", "Nova | Tempest", "G3SG1 | Demeter", "UMP-45 | Bone Pile", "Galil AR | Shattered", "SG 553 | Wave Spray"
+        "Dual Berettas | Black Limba", "Nova | Tempest", "G3SG1 | Demeter", "UMP-45 | Bone Pile", "Galil AR | Shattered", "SG 553 | Wave Spray"
       ],
       "Restricted": [
         "Mac-10 | Graven", "M4A1-S | Bright Water", "M4A4 | Zirka", "USP-S | Overgrowth"

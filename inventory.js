@@ -56,7 +56,7 @@ function updateTotalPrice() {
         }
     });
 
-    totalPriceElem.textContent = `$${total.toFixed(2)}`;
+    totalPriceElem.textContent = `Inventory Value: $${total.toFixed(2)}`;
 }
 
 window.addEventListener('DOMContentLoaded', () => {
