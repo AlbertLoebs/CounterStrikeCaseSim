@@ -9,36 +9,85 @@
 <body>
     <h1 id="title">
         <span class="highlight">Counter Strike Case Simulator</span>
-        <span class="highlight balance">Balance: </span>
+        <span class="highlight balance" id="balanceAmount">Balance: </span>
         <span class="highlight"><a href="inventory.html" class="inventoryBtn">Inventory</a></span>
 
     </h1>
 
     <div class="cases">
-        <div class="CSGOWeaponCase">
+        <div class="case-card" data-case="CS:GO Weapon Case">
+            <h2>CS:GO Weapon Case</h2>
+            <div class="case-count">x0</div>
             <img class="caseImg" id="CSGOWeaponCase" src="caseImages\CSGO Weapon Case.png">
-            <button class="button" onclick="openCase(`CS:GO Weapon Case`)">Open Case</button>
+            <div class="case-price">Loading price...</div>
+            <div class="btn-group">
+                <button class="buyBtn">Buy Case</button>
+                <button class="openBtn">Open Case</button>
+            </div>
         </div>
 
-        <div class="eSports2013Case">
+        <div class="case-card" data-case="eSports 2013 Case">
+            <h2>eSports 2013 Case</h2>
+            <div class="case-count">x0</div>
             <img class="caseImg" id="eSports2013Case" src="caseImages\eSports_2013_Case.png">
-            <button class="button" onclick="openCase(`eSports 2013 Case`)">Open Case</button>
+            <div class="case-price">Loading price...</div>
+            <div class="btn-group">
+                <button class="buyBtn">Buy Case</button>
+                <button class="openBtn">Open Case</button>
+            </div>
         </div>
 
-         <div class="operationBravoCase">
+        <div class="case-card" data-case="Operation Bravo Case">
+            <h2>Operation Bravo Case</h2>
+            <div class="case-count">x0</div>
             <img class="caseImg" id="OperationBravoCase" src="caseImages\OperationBravoCase.png">
-            <button class="button" onclick="openCase(`Operation Bravo Case`)">Open Case</button>
+            <div class="case-price">Loading price...</div>
+            <div class="btn-group">
+                <button class="buyBtn">Buy Case</button>
+                <button class="openBtn">Open Case</button>
+            </div>
         </div>
 
-        <div class="CSGOWeaponCase2">
+        <div class="case-card" data-case="CS:GO Weapon Case 2">
+            <h2>CS:GO Weapon Case 2</h2>
+            <div class="case-count">x0</div>
             <img class="caseImg" id="CSGOWeaponCase2" src="caseImages\weaponcase2.png">
-            <button class="button" onclick="openCase(`CS:GO Weapon Case 2`)">Open Case</button>
+            <div class="case-price">Loading price...</div>
+            <div class="btn-group">
+                <button class="buyBtn">Buy Case</button>
+                <button class="openBtn">Open Case</button>
+            </div>
+        </div>
+
+        <div class="case-card" data-case="eSports 2013 Winter Case">
+            <h2>eSports 2013 Winter Case</h2>
+            <div class="case-count">x0</div>
+            <img class="caseImg" id="WinterOffensiveWeaponCase" src="caseImages\eSports2013WinterCase.png">
+            <div class="case-price">Loading price...</div>
+            <div class="btn-group">
+                <button class="buyBtn">Buy Case</button>
+                <button class="openBtn">Open Case</button>
+            </div>
+        </div>
+
+        <div class="case-card" data-case="Winter Offensive Weapon Case">
+            <h2>Winter Offensive Weapon Case</h2>
+            <div class="case-count">x0</div>
+            <img class="caseImg" id="WinterOffensiveWeaponCase" src="caseImages\WinterOffensiveWeaponCase.png">
+            <div class="case-price">Loading price...</div>
+            <div class="btn-group">
+                <button class="buyBtn">Buy Case</button>
+                <button class="openBtn">Open Case</button>
+            </div>
         </div>
 
     </div>
 
-        <div class="droppedItemImage"></div>
-        <div class="droppedItem"></div>
+    <div class="moneyBtnWrapper">
+        <button id="moneyBtn">$$$</button>
+    </div>
+    <div class="droppedItemImage"></div>
+    <div class="droppedItem"></div>
 
     <script type="module" src="main.js"></script>
 </body>

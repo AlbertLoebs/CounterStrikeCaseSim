@@ -1,6 +1,7 @@
 import { Weapon } from './weapon.js';
-import { WeaponCase, eSports2013Case, RARITY_ODDS, STATTRAK_ODDS, allKnifes, OperationBravoCase, weaponCase2 } from './case.js';
+import { WeaponCase, eSports2013Case, RARITY_ODDS, STATTRAK_ODDS, allKnifes, OperationBravoCase, weaponCase2, winterOffensiveWeaponCase, eSports2013WinterCase } from './case.js';
 import { saveToLocalStorage } from './inventory.js';
+import { getBalance, subBalance, addBalance, updateBalanceDisplay } from './balance.js';
 
 async function openCase(caseName) {
     let nameOfCase;
@@ -15,8 +16,14 @@ async function openCase(caseName) {
         case `Operation Bravo Case`:
             nameOfCase = new OperationBravoCase();
             break;
-        case "CS:GO Weapon Case 2" : 
+        case "CS:GO Weapon Case 2":
             nameOfCase = new weaponCase2();
+            break;
+        case "eSports 2013 Winter Case":
+            nameOfCase = new eSports2013WinterCase();
+            break;
+        case "Winter Offensive Weapon Case":
+            nameOfCase = new winterOffensiveWeaponCase();
             break;
         default:
             console.error("Unknown Case");
@@ -185,6 +192,12 @@ function displayItem(displayName, caseName, unboxedWeapon, price) {
             case "CS:GO Weapon Case 2":
                 path = `./CSGOWeaponCaseSkins2/${weaponKey}.png`;
                 break;
+            case "eSports 2013 Winter Case":
+                path = `./eSports2013WinterCaseSkins/${weaponKey}.png`;
+                break;
+            case "Winter Offensive Weapon Case":
+                path = `./winterOffensiveWeaponCaseSkins/${weaponKey}.png`;
+                break;
             default:
                 console.error("Unknown case");
                 return;
@@ -204,4 +217,133 @@ function displayItem(displayName, caseName, unboxedWeapon, price) {
     };
 
     saveToLocalStorage(itemToSave);
+}
+
+function updateCardCount(caseName, countElem) {
+  if (!countElem) return;
+  const count = getCaseCount(caseName);
+  countElem.textContent = `x${count}`;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".case-card").forEach(async card => {
+    const caseName = card.dataset.case;
+    const buyBtn = card.querySelector(".buyBtn");
+    const openBtn = card.querySelector(".openBtn");
+    const countDisplay = card.querySelector(".case-count");
+    const priceDisplay = card.querySelector(".case-price");
+
+    if (!buyBtn || !openBtn || !countDisplay) return;
+
+    updateCardCount(caseName, countDisplay);
+
+    const casePriceString = await fetchCasePrice(caseName);
+    if (casePriceString){
+        priceDisplay.textContent = `$${casePriceString}`;
+    } else {
+        priceDisplay.textContent = "Price unavailable";
+    }
+
+    buyBtn.addEventListener("click", async () => {
+      const casePriceStr = await fetchCasePrice(caseName);
+      if (!casePriceStr) {
+        alert("Case price unavailable.");
+        return;
+      }
+      const casePrice = Number(casePriceStr);
+      const balance = getBalance();
+
+      if (balance >= casePrice) {
+        subBalance(casePrice);
+        addCaseToInventory(caseName);
+        updateCardCount(caseName, countDisplay);
+        updateBalanceDisplay();
+      } else {
+        alert("Not enough money to buy this case.");
+      }
+    });
+
+    openBtn.addEventListener("click", async () => {
+      const owned = getCaseCount(caseName);
+      const balance = getBalance();
+
+      if (owned < 1) {
+        alert("You don't own this case.");
+        return;
+      }
+      if (balance < 2.50) {
+        alert("Not enough balance for the key.");
+        return;
+      }
+
+      subBalance(2.50);
+      removeCaseFromInventory(caseName);
+      updateCardCount(caseName, countDisplay);
+      updateBalanceDisplay();
+      await openCase(caseName);
+    });
+  });
+    getMoney();
+});
+
+function getCaseCount(caseName) {
+  const inv = JSON.parse(localStorage.getItem("caseInventory")) || {};
+  return inv[caseName] || 0;
+}
+
+function addCaseToInventory(caseName) {
+  const inv = JSON.parse(localStorage.getItem("caseInventory")) || {};
+  inv[caseName] = (inv[caseName] || 0) + 1;
+  localStorage.setItem("caseInventory", JSON.stringify(inv));
+}
+
+function removeCaseFromInventory(caseName) {
+  const inv = JSON.parse(localStorage.getItem("caseInventory")) || {};
+  if (inv[caseName]) {
+    inv[caseName]--;
+    if (inv[caseName] <= 0) delete inv[caseName];
+    localStorage.setItem("caseInventory", JSON.stringify(inv));
+  }
+}
+
+async function fetchCasePrice(caseName) {
+    function normalizeName(name) {
+        return name.toLowerCase().trim();
+    }
+
+    try {
+        const response = await fetch('prices.json');
+        if (!response.ok) {
+            throw new Error('Failed to fetch case prices');
+        }
+        const data = await response.json();
+
+        const normalizedCaseName = normalizeName(caseName);
+
+        const item = data.items.find(entry =>
+            normalizeName(entry.market_hash_name) === normalizedCaseName
+        );
+
+        if (item) {
+            const priceNumber = Number(item.price);
+            return priceNumber.toFixed(2);
+        } else {
+            console.warn(`Price not found for case: ${caseName}`);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error fetching case price:', error);
+        return null;
+    }
+}
+
+function getMoney() {
+    const moneyBtn = document.getElementById("moneyBtn");
+
+    if (moneyBtn) {
+        moneyBtn.addEventListener("click", () => {
+            addBalance(10);
+            updateBalanceDisplay();
+        });
+    }
 }
