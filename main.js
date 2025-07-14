@@ -1,5 +1,5 @@
 import { Weapon } from './weapon.js';
-import { WeaponCase, eSports2013Case, RARITY_ODDS, STATTRAK_ODDS, allKnifes, OperationBravoCase, weaponCase2, winterOffensiveWeaponCase, eSports2013WinterCase } from './case.js';
+import { WeaponCase, eSports2013Case, RARITY_ODDS, STATTRAK_ODDS, allKnifes, OperationBravoCase, weaponCase2, winterOffensiveWeaponCase, eSports2013WinterCase, weaponCase3, operationPhoenixWeaponCase } from './case.js';
 import { saveToLocalStorage } from './inventory.js';
 import { getBalance, subBalance, addBalance, updateBalanceDisplay } from './balance.js';
 
@@ -7,13 +7,13 @@ async function openCase(caseName) {
     let nameOfCase;
 
     switch (caseName) {
-        case `CS:GO Weapon Case`:
+        case "CS:GO Weapon Case":
             nameOfCase = new WeaponCase();
             break;
-        case `eSports 2013 Case`:
+        case "eSports 2013 Case":
             nameOfCase = new eSports2013Case();
             break;
-        case `Operation Bravo Case`:
+        case "Operation Bravo Case":
             nameOfCase = new OperationBravoCase();
             break;
         case "CS:GO Weapon Case 2":
@@ -24,6 +24,12 @@ async function openCase(caseName) {
             break;
         case "Winter Offensive Weapon Case":
             nameOfCase = new winterOffensiveWeaponCase();
+            break;
+        case "CS:GO Weapon Case 3":
+            nameOfCase = new weaponCase3();
+            break;
+        case "Operation Phoenix Weapon Case":
+            nameOfCase = new operationPhoenixWeaponCase();
             break;
         default:
             console.error("Unknown Case");
@@ -197,6 +203,12 @@ function displayItem(displayName, caseName, unboxedWeapon, price) {
                 break;
             case "Winter Offensive Weapon Case":
                 path = `./winterOffensiveWeaponCaseSkins/${weaponKey}.png`;
+                break;
+            case "CS:GO Weapon Case 3" :
+                path = `./CSGOWeaponCaseSkins3/${weaponKey}.png`;
+                break;
+            case "Operation Phoenix Weapon Case" :
+                path = `./OperationPhoenixWeaponCaseSkins/${weaponKey}.png`;
                 break;
             default:
                 console.error("Unknown case");

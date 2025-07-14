@@ -109,7 +109,34 @@ const knifePool = {
       "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
     "Flip Knife": ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained",
       "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+  },
+
+  "CS:GO Weapon Case 3": {
+    "Bayonet": ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained",
+      "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+    "Karambit": ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained",
+      "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+    "Gut Knife": ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained",
+      "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+    "M9 Bayonet": ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained",
+      "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+    "Flip Knife": ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained",
+      "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+  },
+
+  "Operation Phoenix Weapon Case": {
+    "Bayonet": ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained",
+      "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+    "Karambit": ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained",
+      "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+    "Gut Knife": ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained",
+      "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+    "M9 Bayonet": ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained",
+      "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
+    "Flip Knife": ["Fade", "Slaughter", "Case Hardened", "★", "Crimson Web", "Blue Steel", "Night", "Stained",
+      "Boreal Forest", "Urban Masked", "Scorched", "Forest DDPAT", "Safari Mesh"],
   }
+
 };
 
 function getKnife(caseName) {
@@ -229,7 +256,7 @@ export class winterOffensiveWeaponCase extends Case {
 }
 
 export class eSports2013WinterCase extends Case {
-constructor() {
+  constructor() {
     super("eSports 2013 Winter Case", {
       "Mil-Spec Grade": [
         "Five-SeveN | Nightshade", "G3SG1 | Azure Zebra", "Nova | Ghost Camo", "PP-Bizon | Water Sigil", "P250 | Steel Disruption", "Galil AR | Blue Titanium"
@@ -247,6 +274,47 @@ constructor() {
     });
   }
 }
+
+export class weaponCase3 extends Case {
+  constructor() {
+    super("CS:GO Weapon Case 3", {
+      "Mil-Spec Grade": [
+        "USP-S | Stainless", "Glock-18 | Blue Fissure", "Dual Berettas | Panther", "CZ75-Auto | Crimson Web", "P2000 | Red FragCam"
+      ],
+      "Restricted": [
+        "Desert Eagle | Heirloom", "Five-SeveN | Copper Galaxy", "Tec-9 | Titanium Bit", "CZ75-Auto | Tread Plate"
+      ],
+      "Classified": [
+        "P250 | Undertow", "CZ75-Auto | The Fuschia Is Now"
+      ],
+      "Covert": [
+        "CZ75-Auto | Victoria"
+      ],
+      "Exceedingly Rare": getKnife("CS:GO Weapon Case 3")
+    });
+  }
+}
+
+export class operationPhoenixWeaponCase extends Case {
+  constructor() {
+    super("Operation Phoenix Weapon Case", {
+      "Mil-Spec Grade": [
+        "Tec-9 | Sandstorm", "MAG-7 | Heaven Guard", "Negev | Terrain", "UMP-45 | Corporal"
+      ],
+      "Restricted": [
+        "USP-S | Guardian", "SG 553 | Pulse", "MAC-10 | Heat", "FAMAS | Sergeant"
+      ],
+      "Classified": [
+        "AK-47 | Redline", "P90 | Trigon", "Nova | Antique"
+      ],
+      "Covert": [
+        "AWP | Asiimov", "AUG | Chameleon"
+      ],
+      "Exceedingly Rare": getKnife("Operation Phoenix Weapon Case")
+    });
+  }
+}
+
 
 export function getKnifeNames(caseName) {
   return getKnife(caseName);
