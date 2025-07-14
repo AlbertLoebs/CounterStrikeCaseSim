@@ -1,5 +1,5 @@
-body{
-    background-color: gray;
+body {
+  background-color: gray;
 }
 
 #title {
@@ -10,76 +10,82 @@ body{
   gap: 10px;
 }
 
-.highlight{
-    background-color: hsl(29, 100%, 50%);
+.highlight {
+  background-color: hsl(29, 100%, 50%);
 }
 
-.cases{
-    display: flex;
-    text-align: center;
+.cases {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .case-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    border: 2px solid;
-    width: 250px;
-    align-items: center;
-    padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border: 2px solid;
+  width: 250px;
+  align-items: center;
+  padding: 10px;
 }
 
 .case-count {
-    align-self: flex-end;
-    font-weight: bold;
-    margin-bottom: 5px;
+  align-self: flex-end;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .btn-group {
   display: flex;
-  gap: 10px; 
+  gap: 10px;
   justify-content: center;
   margin-top: 10px;
 }
 
 .btn-group button {
-  flex: 1; 
+  flex: 1;
   padding: 8px 12px;
   cursor: pointer;
 }
+
 .moneyBtnWrapper {
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
 
-#moneyBtn{
+#moneyBtn {
   border-radius: 100px;
 }
 
-.droppedItem{
-    text-align: center;
+.droppedItem {
+  text-align: center;
 }
 
-.droppedItemImage{
-    margin-top: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}   
+.droppedItemImage {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .droppedItemImage img {
   max-width: 100%;
   height: auto;
 }
 
-.inventoryBtn{
+.inventoryBtn {
   text-decoration: none;
   color: black;
   right: 20px;
   background-color: hsl(29, 100%, 50%);
 }
 
-.balance{
+.balance {
   background-color: hsl(29, 100%, 50%);
 }
