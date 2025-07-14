@@ -3,7 +3,11 @@ body{
 }
 
 #title {
-    text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .highlight{
@@ -72,15 +76,10 @@ body{
 .inventoryBtn{
   text-decoration: none;
   color: black;
-  position: absolute;
   right: 20px;
   background-color: hsl(29, 100%, 50%);
 }
 
 .balance{
-  text-decoration: none;
-  color: black;
-  position: absolute;
-  right: 450px;
   background-color: hsl(29, 100%, 50%);
 }
