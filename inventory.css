@@ -1,8 +1,12 @@
-#inventoryContainer{
-    border: 2px solid black;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+body {
+  background-color: gray;
+}
+
+#inventoryContainer {
+  border: 2px solid black;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
 }
 
 .inventoryItem {
@@ -17,4 +21,37 @@
   height: auto;
   display: block;
   margin: 0 auto;
+}
+
+.sellButton {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.sellButton:hover {
+  background-color: tomato;
+}
+
+.highlight {
+  background-color: hsl(29, 100%, 50%);
+}
+
+#title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+.homeBtn {
+  text-decoration: none;
+  color: black;
+  right: 20px;
+  background-color: hsl(29, 100%, 50%)
 }

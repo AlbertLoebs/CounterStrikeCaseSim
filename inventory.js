@@ -1,3 +1,4 @@
+import { updateBalanceDisplay, addBalance } from './balance.js';
 let inventory = [];
 
 export function saveToLocalStorage(item) {
@@ -21,7 +22,7 @@ function loadInventory() {
         return;
     }
 
-    inventory.forEach(item => {
+    inventory.forEach((item, index) => {
         const itemDiv = document.createElement("div");
         itemDiv.classList.add("inventoryItem");
 
@@ -32,9 +33,16 @@ function loadInventory() {
         const info = document.createElement("p");
         info.textContent = `${item.name} (${item.condition}) | Float: ${item.float.toFixed(4)} | Seed: ${item.seed} | $${item.price}`;
 
+        const sellBtn = document.createElement("button");
+        sellBtn.textContent = "Sell";
+        sellBtn.classList.add("sellButton");
+
+        sellBtn.addEventListener("click", () => sellSkin(index));
+
+
         itemDiv.appendChild(img);
         itemDiv.appendChild(info);
-
+        itemDiv.appendChild(sellBtn);
         container.appendChild(itemDiv);
     });
 
@@ -57,6 +65,21 @@ function updateTotalPrice() {
     });
 
     totalPriceElem.textContent = `Inventory Value: $${total.toFixed(2)}`;
+}
+
+function sellSkin(index) {
+    let inventory = JSON.parse(localStorage.getItem("inventory")) || [];
+    const item = inventory[index];
+    if (!item) return;
+
+    addBalance(parseFloat(item.price)); // Adds price to userBalance and updates display
+
+    // Remove skin from inventory
+    inventory.splice(index, 1);
+    localStorage.setItem("inventory", JSON.stringify(inventory));
+
+    loadInventory();       // refresh inventory UI
+    updateTotalPrice();
 }
 
 window.addEventListener('DOMContentLoaded', () => {

@@ -359,3 +359,7 @@ function getMoney() {
         });
     }
 }
+
+window.addEventListener('DOMContentLoaded', () => {
+  updateBalanceDisplay();
+});
